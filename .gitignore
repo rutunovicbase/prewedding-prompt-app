@@ -10,6 +10,7 @@
 .melos_tool/
 generated_plugin_registrant.dart
 
+
 # IDEs
 # IntelliJ / Android Studio
 .idea/
