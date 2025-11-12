@@ -116,3 +116,22 @@ TextStyle size32TextStyle({
     decoration: decoration,
   );
 }
+
+TextStyle size30TextStyle({
+  Color? textColor,
+  FontWeight? fontWeight,
+  String? fontFamily,
+  double? height,
+  double? letterSpacing,
+  TextDecoration? decoration,
+}) {
+  return TextStyle(
+    color: textColor ?? AppColors.black,
+    fontSize: 30,
+    height: height,
+    fontWeight: fontWeight ?? FontWeight.w600,
+    fontFamily: fontFamily ?? AppStrings.playfair,
+    letterSpacing: letterSpacing,
+    decoration: decoration,
+  );
+}
