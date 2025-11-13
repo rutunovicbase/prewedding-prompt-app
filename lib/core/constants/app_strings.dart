@@ -26,4 +26,18 @@ class AppStrings {
   static const String titlePage3 = "Trending Wedding \nThemes Curated for You";
   static const String subTitlePage3 =
       "Discover prompts inspired by the latest wedding styles.\n";
+
+  // Home screen Strings
+  static const String theRoyalPreWedding = "The Royal Pre-Wedding";
+  static const String lovableCategories = "Lovable Categories";
+  static const String preWedding = "Pre-Wedding";
+  static const String engagement = "Engagement";
+  static const String wedding = "Wedding";
+  static const String sangeet = "Sangeet";
+  static const String haldi = "Haldi";
+  static const String mehndi = "Mehndi";
+  static const String grahpravesh = "Grahpravesh";
+
+  // home screen button Strings
+  static const String generate = "Generate";
 }

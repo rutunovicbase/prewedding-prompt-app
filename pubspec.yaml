@@ -38,6 +38,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   smooth_page_indicator: ^1.2.1
   flutter_bloc: ^9.1.1
+  flutter_animate: ^4.5.2
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:

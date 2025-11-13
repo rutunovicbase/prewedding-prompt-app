@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wedding_prompt_app/core/constants/app_colors.dart';
 import 'package:wedding_prompt_app/core/constants/app_images.dart';
 import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 import 'package:wedding_prompt_app/core/utils/text_styles.dart';
 import 'package:wedding_prompt_app/features/onboarding/bloc/onboarding_cubit.dart';
+import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import 'model/onboarding_page_model.dart';
 
@@ -63,49 +66,82 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     ];
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Builder(
-            builder: (context) {
-              return PageView.builder(
-                controller: _controller,
-                onPageChanged: (index) {
-                  context.read<OnboardingCubit>().currentPage(index);
-                },
-                itemCount: pages.length,
-                itemBuilder: (context, index) {
-                  final page = pages[index];
-                  return Stack(
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        child: Image.asset(page.image, fit: BoxFit.cover),
+      body: BlocBuilder<OnboardingCubit, OnboardingState>(
+        builder: (context, state) {
+          final page = pages[state.currentIndex];
+          return Stack(
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Image.asset(
+                      pages[state.currentIndex].image,
+                      fit: BoxFit.cover,
+                    ),
+                  ).animate().fadeIn(duration: 1000.ms),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [AppColors.white, AppColors.transparent],
+                        stops: [0.25, 0.60],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [AppColors.white, AppColors.transparent],
-                            stops: [0.25, 0.60],
+                    ),
+                  ),
+                ],
+              ),
+              Builder(
+                builder: (context) {
+                  return PageView.builder(
+                    // reverse: true,
+                    scrollDirection: Axis.vertical,
+                    controller: _controller,
+                    onPageChanged: (index) {
+                      context.read<OnboardingCubit>().currentPage(index);
+                    },
+                    itemCount: pages.length,
+                    itemBuilder: (context, index) {
+                      final page = pages[index];
+                      return Stack(
+                        children: [
+                          SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height,
+                                child: Image.asset(
+                                  page.image,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                              .animate()
+                              .fadeIn(duration: 500.ms)
+                              .then(delay: 100.ms),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  AppColors.white,
+                                  AppColors.transparent,
+                                ],
+                                stops: [0.25, 0.60],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
+                        ],
+                      );
+                    },
                   );
                 },
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 50),
-              child: BlocBuilder<OnboardingCubit, OnboardingState>(
-                builder: (context, state) {
-                  final page = pages[state.currentIndex];
-                  return Column(
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, right: 16, bottom: 50),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -150,6 +186,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
+                                    context.read<OnboardingCubit>().currentPage(
+                                      2,
+                                    );
                                     _controller.animateToPage(
                                       2,
                                       duration: const Duration(
@@ -171,11 +210,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                     backgroundColor: AppColors.darkYellow,
                                   ),
                                   onPressed: () {
+                                    context.read<OnboardingCubit>().currentPage(
+                                      state.currentIndex + 1,
+                                    );
+
                                     _controller.nextPage(
                                       duration: const Duration(
                                         milliseconds: 500,
                                       ),
-                                      curve: Curves.fastOutSlowIn,
+                                      curve: Curves.linear,
                                     );
                                   },
                                   child: Padding(
@@ -202,7 +245,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.darkYellow,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  (context).go(AppRouteStrings.homeScreen);
+                                },
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                     top: 10,
@@ -221,12 +266,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               ),
                             ),
                     ],
-                  );
-                },
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
