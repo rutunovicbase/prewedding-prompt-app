@@ -154,3 +154,22 @@ TextStyle size20TextStyle({
     decoration: decoration,
   );
 }
+
+TextStyle size18TextStyle({
+  Color? textColor,
+  FontWeight? fontWeight,
+  String? fontFamily,
+  double? height,
+  double? letterSpacing,
+  TextDecoration? decoration,
+}) {
+  return TextStyle(
+    color: textColor ?? AppColors.black,
+    fontSize: 18,
+    height: height,
+    fontWeight: fontWeight ?? FontWeight.w600,
+    fontFamily: fontFamily ?? AppStrings.playfairDisplay,
+    letterSpacing: letterSpacing,
+    decoration: decoration,
+  );
+}

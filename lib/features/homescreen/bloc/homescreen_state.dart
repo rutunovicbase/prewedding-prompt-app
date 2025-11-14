@@ -1,6 +1,11 @@
-part of 'homescreen_bloc.dart';
+class HomescreenState {
+  final int currentIndex;
 
-@immutable
-sealed class HomescreenState {}
-
-final class HomescreenInitial extends HomescreenState {}
+  HomescreenState({this.currentIndex = 0});
+  factory HomescreenState.initial() {
+    return HomescreenState();
+  }
+  HomescreenState copyWith({int? currentIndex}) {
+    return HomescreenState(currentIndex: currentIndex ?? this.currentIndex);
+  }
+}

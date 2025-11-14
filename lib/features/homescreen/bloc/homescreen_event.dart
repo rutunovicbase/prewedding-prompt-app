@@ -1,4 +1,5 @@
-part of 'homescreen_bloc.dart';
+abstract class HomescreenEvent {}
 
-@immutable
-sealed class HomescreenEvent {}
+class SliderTimer extends HomescreenEvent {}
+
+class SliderIndex extends HomescreenEvent {}

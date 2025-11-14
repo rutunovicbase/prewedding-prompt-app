@@ -28,7 +28,6 @@ class AppStrings {
       "Discover prompts inspired by the latest wedding styles.\n";
 
   // Home screen Strings
-  static const String theRoyalPreWedding = "The Royal Pre-Wedding";
   static const String lovableCategories = "Lovable Categories";
   static const String preWedding = "Pre-Wedding";
   static const String engagement = "Engagement";
@@ -37,7 +36,11 @@ class AppStrings {
   static const String haldi = "Haldi";
   static const String mehndi = "Mehndi";
   static const String grahpravesh = "Grahpravesh";
-
   // home screen button Strings
   static const String generate = "Generate";
+  //home screen slider title
+  static const String theRoyalPreWedding = "The Royal Pre-Wedding ";
+  static const String thePerfectMehndi = "The Perfect Mehndi ";
+  static const String discoSangeet = "Disco Sangeet";
+  static const String gardernPreWedding = "Gardern Pre-Wedding";
 }
