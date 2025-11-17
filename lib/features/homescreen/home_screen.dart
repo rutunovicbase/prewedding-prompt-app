@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wedding_prompt_app/core/constants/app_icons.dart';
 import 'package:wedding_prompt_app/core/constants/app_images.dart';
-import 'package:wedding_prompt_app/features/homescreen/bloc/homescreen_bloc.dart';
-import 'package:wedding_prompt_app/features/homescreen/bloc/homescreen_event.dart';
-import 'package:wedding_prompt_app/features/homescreen/bloc/homescreen_state.dart';
+import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
+import 'package:wedding_prompt_app/features/homescreen/bloc/homes_event.dart';
+import 'package:wedding_prompt_app/features/homescreen/bloc/homes_state.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
@@ -21,13 +21,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    context.read<HomescreenBloc>().add(SliderTimer());
+    context.read<HomesBloc>().add(SliderTimer());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<HomescreenBloc>();
+    final bloc = context.read<HomesBloc>();
 
     // Demo category list
     List<Map<String, String>> categories = [
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 20),
 
             // -------------------- SLIDER --------------------
-            BlocBuilder<HomescreenBloc, HomescreenState>(
+            BlocBuilder<HomesBloc, HomesState>(
               builder: (context, state) {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 2500),

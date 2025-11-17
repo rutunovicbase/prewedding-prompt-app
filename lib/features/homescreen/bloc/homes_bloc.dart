@@ -4,13 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 
 import '../../../core/constants/app_images.dart';
-import 'homescreen_event.dart';
-import 'homescreen_state.dart';
+import 'homes_event.dart';
+import 'homes_state.dart';
 
-class HomescreenBloc extends Bloc<HomescreenEvent, HomescreenState> {
+class HomesBloc extends Bloc<HomesEvent, HomesState> {
   Timer? _timer;
 
-  HomescreenBloc() : super(HomescreenState.initial()) {
+  HomesBloc() : super(HomesState.initial()) {
     on<SliderTimer>(_onSliderTimer);
     on<SliderIndex>(_onSliderIndex);
   }
@@ -24,7 +24,7 @@ class HomescreenBloc extends Bloc<HomescreenEvent, HomescreenState> {
 
   Future<void> _onSliderTimer(
     SliderTimer event,
-    Emitter<HomescreenState> emit,
+    Emitter<HomesState> emit,
   ) async {
     _timer?.cancel();
 
@@ -35,7 +35,7 @@ class HomescreenBloc extends Bloc<HomescreenEvent, HomescreenState> {
 
   Future<void> _onSliderIndex(
     SliderIndex event,
-    Emitter<HomescreenState> emit,
+    Emitter<HomesState> emit,
   ) async {
     final next = (state.currentIndex + 1) % sliderImage.length;
     emit(state.copyWith(currentIndex: next)); // SAFE

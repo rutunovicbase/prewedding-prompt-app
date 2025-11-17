@@ -11,11 +11,3 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     });
   }
 }
-
-// void startTimer(bool isStart){
-//   Future.delayed(Duration(milliseconds: 200), () {
-//     state.isStart=isStart;
-//     emit(state.copyWith(state.isStart));
-//
-//   });
-// }
