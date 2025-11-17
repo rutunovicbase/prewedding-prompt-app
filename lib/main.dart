@@ -18,7 +18,7 @@ class Myapp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
-        routerConfig: Routes().goRouter,
+        routerConfig: Routes.router,
         theme: ThemeData(fontFamily: AppStrings.quilon),
       ),
     );

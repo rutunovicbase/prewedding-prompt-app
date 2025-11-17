@@ -6,6 +6,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(OnboardingState.initial());
 
   void currentPage(int index) {
-    emit(state.copyWith(index));
+    Future.delayed(Duration(milliseconds: 100), () {
+      emit(state.copyWith(index));
+    });
   }
 }

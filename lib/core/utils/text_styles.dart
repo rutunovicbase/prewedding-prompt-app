@@ -135,3 +135,41 @@ TextStyle size30TextStyle({
     decoration: decoration,
   );
 }
+
+TextStyle size20TextStyle({
+  Color? textColor,
+  FontWeight? fontWeight,
+  String? fontFamily,
+  double? height,
+  double? letterSpacing,
+  TextDecoration? decoration,
+}) {
+  return TextStyle(
+    color: textColor ?? AppColors.black,
+    fontSize: 20,
+    height: height,
+    fontWeight: fontWeight ?? FontWeight.w500,
+    fontFamily: fontFamily ?? AppStrings.quilon,
+    letterSpacing: letterSpacing,
+    decoration: decoration,
+  );
+}
+
+TextStyle size18TextStyle({
+  Color? textColor,
+  FontWeight? fontWeight,
+  String? fontFamily,
+  double? height,
+  double? letterSpacing,
+  TextDecoration? decoration,
+}) {
+  return TextStyle(
+    color: textColor ?? AppColors.black,
+    fontSize: 18,
+    height: height,
+    fontWeight: fontWeight ?? FontWeight.w600,
+    fontFamily: fontFamily ?? AppStrings.playfairDisplay,
+    letterSpacing: letterSpacing,
+    decoration: decoration,
+  );
+}
