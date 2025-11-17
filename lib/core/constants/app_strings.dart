@@ -36,6 +36,8 @@ class AppStrings {
   static const String haldi = "Haldi";
   static const String mehndi = "Mehndi";
   static const String grahpravesh = "Grahpravesh";
+  static const String adBanner = "Ad Banner";
+
   // home screen button Strings
   static const String generate = "Generate";
   //home screen slider title
@@ -43,4 +45,9 @@ class AppStrings {
   static const String thePerfectMehndi = "The Perfect Mehndi ";
   static const String discoSangeet = "Disco Sangeet";
   static const String gardernPreWedding = "Gardern Pre-Wedding";
+  // bottomNavigationBar Strings
+
+  static const String home = "Home";
+  static const String favorite = "Favorite";
+  static const String profile = "Profile";
 }

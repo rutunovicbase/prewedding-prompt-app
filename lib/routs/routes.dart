@@ -12,7 +12,7 @@ import '../features/onboarding/bloc/onboarding_cubit.dart';
 final GlobalKey<NavigatorState> navigatoryKey = GlobalKey<NavigatorState>();
 
 class Routes {
-  final goRouter = GoRouter(
+  static final GoRouter router = GoRouter(
     initialLocation: AppRouteStrings.splash,
     navigatorKey: navigatoryKey,
     routes: [

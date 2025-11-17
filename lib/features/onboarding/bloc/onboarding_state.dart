@@ -2,7 +2,6 @@ part of 'onboarding_cubit.dart';
 
 class OnboardingState {
   int currentIndex;
-
   OnboardingState({this.currentIndex = 0});
 
   factory OnboardingState.initial() {
