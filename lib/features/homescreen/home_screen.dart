@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(height: 20),
 
-            // -------------------- SLIDER --------------------
+            ////////////     SLIDER
             BlocBuilder<HomesBloc, HomesState>(
               builder: (context, state) {
                 return AnimatedSwitcher(
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Image.asset(AppIcons.heart, fit: BoxFit.cover),
                       ),
 
-                      // Title + Generate Button
+                      // Title and Generate Button
                       Positioned(
                         bottom: 15,
                         right: 0,
@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
-            // ---------------- LOVABLE CATEGORIES TITLE ----------------
+            ////////////    LOVABLE CATEGORIES TITLE
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
               child: Align(
@@ -280,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // ---------------- FIRST 2 CATEGORY ITEMS ----------------
+            ///////////     FIRST 2 CATEGORY ITEMS
             _buildCommonGridView(
               itemCount: 2,
               itemBuilder: (context, index) {
@@ -293,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 20.h),
 
-            //  ---------------- FULL WIDTH THIRD ITEM ----------------
+            ///////////    FULL WIDTH THIRD ITEM
             fullWidthCategoryItem(
               image: categories[2]["image"]!,
               title: categories[2]["title"]!,
@@ -312,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20.h),
 
-            // ---------------- REMAINING ITEMS GRID ----------------
+            /////////     REMAINING ITEMS GRID
             _buildCommonGridView(
               itemCount: categories.length - 3,
               itemBuilder: (context, index) {
@@ -406,7 +406,7 @@ Widget categoryItem({required String image, required String title}) {
   );
 }
 
-// ---------------- FULL WIDTH CATEGORY ITEM ----------------
+//////////      FULL WIDTH CATEGORY ITEM
 Widget fullWidthCategoryItem({required String image, required String title}) {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 16.w),

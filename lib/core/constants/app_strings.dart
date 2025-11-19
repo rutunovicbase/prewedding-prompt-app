@@ -52,4 +52,10 @@ class AppStrings {
   static const String navBarProfile = "Profile";
   // Favorite screen
   static const String categories = "Categories";
+  static const String all = "All";
+
+  // profile screen icons
+  static const String rateUs = "Rate Us";
+  static const String shareApp = "Share App";
+  static const String privacyPolicy = "Privacy Policy";
 }

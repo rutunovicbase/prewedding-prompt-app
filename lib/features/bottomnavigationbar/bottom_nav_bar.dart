@@ -1,126 +1,83 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:motion_tab_bar/MotionTabBar.dart';
+import 'package:motion_tab_bar/MotionTabBarController.dart';
+import 'package:wedding_prompt_app/core/constants/app_colors.dart';
+import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_event.dart';
+import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_state.dart';
 import 'package:wedding_prompt_app/features/favoritescreen/favorite_screen.dart';
+import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/home_screen.dart';
 import 'package:wedding_prompt_app/features/profilescreen/profile_screen.dart';
 
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_icons.dart';
-import '../../core/constants/app_strings.dart';
-import '../../core/utils/text_styles.dart';
-
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
-
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _BottomNavBarState extends State<BottomNavBar>
+    with SingleTickerProviderStateMixin {
+  MotionTabBarController? _motionTabBarController;
+
+  @override
+  void initState() {
+    super.initState();
+    _motionTabBarController = MotionTabBarController(length: 3, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> screen = [
-      HomeScreen(),
+      BlocProvider(create: (context) => HomesBloc(), child: HomeScreen()),
       FavoriteScreen(),
       ProfileScreen(),
     ];
-    final bloc = context.read<BottomNavigationBarBloc>();
-    return Scaffold(
-      body: screen[bloc.state.currentNavBarIndex],
-      bottomNavigationBar: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18),
-            height: 90.h,
+    return BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
+      builder: (context, state) {
+        return Scaffold(
+          extendBody: true,
+          body: IndexedStack(index: state.currentNavBarIndex, children: screen),
+          bottomNavigationBar: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 16.r),
             decoration: BoxDecoration(
               color: AppColors.black,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                // ---------------- HOME ----------------
-                GestureDetector(
-                  onTap: () {
-                    context.read<BottomNavigationBarBloc>().add(NavBarIndex(0));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      bloc.state.currentNavBarIndex == 0
-                          ? Image.asset(AppIcons.navbarHomeFill, height: 50.h)
-                          : Image.asset(AppIcons.navbarHome, height: 26.h),
-                      const SizedBox(height: 5),
-                      Text(
-                        AppStrings.navBarhome,
-                        style: size14TextStyle(
-                          textColor: bloc.state.currentNavBarIndex == 0
-                              ? AppColors.white1
-                              : AppColors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // ---------------- FAVORITE ----------------
-                GestureDetector(
-                  onTap: () {
-                    context.read<BottomNavigationBarBloc>().add(NavBarIndex(1));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      bloc.state.currentNavBarIndex == 1
-                          ? Image.asset(AppIcons.navbarHeartFill, height: 50.h)
-                          : Image.asset(AppIcons.navbarHeart, height: 26.h),
-                      const SizedBox(height: 5),
-                      Text(
-                        AppStrings.navBarFavorite,
-                        style: size14TextStyle(
-                          textColor: bloc.state.currentNavBarIndex == 1
-                              ? AppColors.white1
-                              : AppColors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // ---------------- PROFILE ----------------
-                GestureDetector(
-                  onTap: () {
-                    context.read<BottomNavigationBarBloc>().add(NavBarIndex(2));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      bloc.state.currentNavBarIndex == 2
-                          ? Image.asset(
-                              AppIcons.navbarProfileFill,
-                              height: 50.h,
-                            )
-                          : Image.asset(AppIcons.navbarProfile, height: 26.h),
-                      const SizedBox(height: 5),
-                      Text(
-                        AppStrings.navBarProfile,
-                        style: size14TextStyle(
-                          textColor: bloc.state.currentNavBarIndex == 2
-                              ? AppColors.white1
-                              : AppColors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            child: MotionTabBar(
+              controller: _motionTabBarController,
+              initialSelectedTab: AppStrings.navBarhome,
+              labels: [
+                AppStrings.navBarhome,
+                AppStrings.navBarFavorite,
+                AppStrings.navBarProfile,
               ],
+              icons: [
+                Icons.home_filled,
+                CupertinoIcons.heart_solid,
+                Icons.person_rounded,
+              ],
+              tabSize: 50.h,
+              tabBarHeight: 60.h,
+              tabIconSize: 27.h,
+              tabIconSelectedSize: 31.h,
+              tabSelectedColor: AppColors.red,
+              tabIconSelectedColor: Colors.white,
+              tabIconColor: Colors.white,
+              tabBarColor: Colors.transparent,
+              textStyle: TextStyle(fontSize: 13, color: Colors.white),
+              onTabItemSelected: (int value) {
+                _motionTabBarController!.index = value;
+                context.read<BottomNavigationBarBloc>().add(NavBarIndex(value));
+              },
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
