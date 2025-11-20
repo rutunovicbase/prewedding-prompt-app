@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:motion_tab_bar/MotionTabBarController.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedding_prompt_app/core/constants/app_icons.dart';
 import 'package:wedding_prompt_app/core/constants/app_images.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_event.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_state.dart';
+import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
@@ -25,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomesBloc>().add(SliderTimer());
     super.initState();
   }
-
-  MotionTabBarController? _motionTabBarController;
 
   @override
   Widget build(BuildContext context) {
@@ -329,118 +328,108 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-////////    favoriteUI   /////
-//
-// Widget _favoriteUI() {
-//   return const Center(
-//     child: Text(
-//       "Favorites Screen",
-//       style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-//     ),
-//   );
-// }
-// ////   profileUI  /////
-//
-// Widget _profileUI() {
-//   return const Center(
-//     child: Text(
-//       "Profile Screen",
-//       style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-//     ),
-//   );
-// }
 
-Widget _buildCommonGridView({
-  required int itemCount,
-  required Widget? Function(BuildContext, int) itemBuilder,
-}) {
-  return GridView.builder(
-    shrinkWrap: true,
-    padding: EdgeInsets.symmetric(horizontal: 16.w),
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: itemCount,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      crossAxisSpacing: 20.w,
-      mainAxisSpacing: 20.h,
-      childAspectRatio: .83,
-    ),
-    itemBuilder: itemBuilder,
-  );
-}
+  Widget _buildCommonGridView({
+    required int itemCount,
+    required Widget? Function(BuildContext, int) itemBuilder,
+  }) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: itemCount,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 20.w,
+        mainAxisSpacing: 20.h,
+        childAspectRatio: .83,
+      ),
+      itemBuilder: itemBuilder,
+    );
+  }
 
-/////////////    CATEGORY ITEM Normal Grid    //////////
-Widget categoryItem({required String image, required String title}) {
-  return Container(
-    padding: EdgeInsets.all(8.r),
-    decoration: BoxDecoration(
-      color: AppColors.white1,
-      borderRadius: BorderRadius.circular(16.r),
-      border: Border.all(color: AppColors.darkYellow, width: 1),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black,
-          blurRadius: 15,
-          spreadRadius: -8,
-          offset: Offset(5, 5),
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
-          child: Image.asset(image, fit: BoxFit.cover),
-        ),
-        Expanded(
-          child: Center(
-            child: Text(
-              title,
-              style: size16TextStyle(fontFamily: AppStrings.playfairDisplay),
+  /////////////    CATEGORY ITEM Normal Grid    //////////
+  Widget categoryItem({required String image, required String title}) {
+    return InkWell(
+      onTap: () => context.push(AppRouteStrings.categories),
+      child: Container(
+        padding: EdgeInsets.all(8.r),
+        decoration: BoxDecoration(
+          color: AppColors.white1,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: AppColors.darkYellow, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black,
+              blurRadius: 15,
+              spreadRadius: -8,
+              offset: Offset(5, 5),
             ),
-          ),
+          ],
         ),
-      ],
-    ),
-  );
-}
-
-//////////      FULL WIDTH CATEGORY ITEM
-Widget fullWidthCategoryItem({required String image, required String title}) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 16.w),
-    padding: EdgeInsets.all(8.w),
-    decoration: BoxDecoration(
-      color: AppColors.white1,
-      borderRadius: BorderRadius.circular(40.r),
-      border: Border.all(color: AppColors.darkYellow, width: 1),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black,
-          blurRadius: 15,
-          spreadRadius: -8,
-          offset: Offset(5, 5),
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30.r),
-          child: Image.asset(image, fit: BoxFit.fill),
-        ),
-        Padding(
-          padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
-          child: Text(
-            title,
-            style: size16TextStyle(
-              fontFamily: AppStrings.playfairDisplay,
-              fontWeight: FontWeight.w600,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: Image.asset(image, fit: BoxFit.cover),
             ),
-          ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  title,
+                  style: size16TextStyle(
+                    fontFamily: AppStrings.playfairDisplay,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
+
+  //////////      FULL WIDTH CATEGORY ITEM
+  Widget fullWidthCategoryItem({required String image, required String title}) {
+    return InkWell(
+      onTap: () {
+        context.push(AppRouteStrings.categories);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.all(8.w),
+        decoration: BoxDecoration(
+          color: AppColors.white1,
+          borderRadius: BorderRadius.circular(40.r),
+          border: Border.all(color: AppColors.darkYellow, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black,
+              blurRadius: 15,
+              spreadRadius: -8,
+              offset: Offset(5, 5),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30.r),
+              child: Image.asset(image, fit: BoxFit.fill),
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
+              child: Text(
+                title,
+                style: size16TextStyle(
+                  fontFamily: AppStrings.playfairDisplay,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

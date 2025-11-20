@@ -35,13 +35,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               iconPath: AppIcons.rateUs,
               onTap: () {},
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             CustomTile(
               title: AppStrings.shareApp,
               iconPath: AppIcons.shareApp,
               onTap: () {},
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             CustomTile(
               title: AppStrings.privacyPolicy,
               iconPath: AppIcons.privacyPolicy,
@@ -89,8 +89,8 @@ class CustomTile extends StatelessWidget {
         height: 45.h,
         width: 350.w,
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.amber, width: 0.6),
+          color: AppColors.white1,
+          border: Border.all(color: AppColors.cream, width: 0.9.w),
           borderRadius: BorderRadius.circular(16.r),
         ),
         child: Row(

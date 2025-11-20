@@ -56,6 +56,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:wedding_prompt_app/features/categories/categories_screen.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/home_screen.dart';
 import 'package:wedding_prompt_app/features/onboarding/on_boarding_screen.dart';
@@ -113,6 +114,10 @@ class Routes {
             child: const BottomNavBar(),
           ),
         ),
+      ),
+      GoRoute(
+        path: AppRouteStrings.categories,
+        builder: (context, state) => CategoriesScreen(),
       ),
     ],
   );

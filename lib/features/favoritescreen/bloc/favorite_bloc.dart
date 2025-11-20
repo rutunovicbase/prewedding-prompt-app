@@ -9,7 +9,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   FavoriteBloc() : super(FavoriteState.initial()) {
     on<SelectedIndex>(_onSelectedIndex);
   }
-
   FutureOr<void> _onSelectedIndex(
     SelectedIndex event,
     Emitter<FavoriteState> emit,

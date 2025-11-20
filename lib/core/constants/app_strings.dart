@@ -53,6 +53,8 @@ class AppStrings {
   // Favorite screen
   static const String categories = "Categories";
   static const String all = "All";
+  static const String thePalaceWedding = "The Palace Wedding";
+  static const String gardenCouple = "Garden Couple";
 
   // profile screen icons
   static const String rateUs = "Rate Us";

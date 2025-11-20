@@ -19,4 +19,9 @@ class AppImages {
   static const String haldi = "assets/images/haldi.png";
   static const String mehndi = "assets/images/mehndi.png";
   static const String grahpravesh = "assets/images/grahpravesh.png";
+
+  // favorite screen Images
+  static const String gardenCouple = "assets/images/garden_couple.png";
+  static const String sangeetDanceF = "assets/images/sangeet_dance_f.png";
+  static const String haldiF = "assets/images/haldi_f.png";
 }

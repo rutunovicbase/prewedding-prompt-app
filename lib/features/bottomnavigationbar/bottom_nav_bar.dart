@@ -9,6 +9,7 @@ import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_event.dart';
 import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navigation_bar_state.dart';
+import 'package:wedding_prompt_app/features/favoritescreen/bloc/favorite_bloc.dart';
 import 'package:wedding_prompt_app/features/favoritescreen/favorite_screen.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/home_screen.dart';
@@ -16,6 +17,7 @@ import 'package:wedding_prompt_app/features/profilescreen/profile_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
+
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
@@ -34,14 +36,26 @@ class _BottomNavBarState extends State<BottomNavBar>
   Widget build(BuildContext context) {
     final List<Widget> screen = [
       BlocProvider(create: (context) => HomesBloc(), child: HomeScreen()),
-      FavoriteScreen(),
+      BlocProvider(
+        create: (context) => FavoriteBloc(),
+        child: FavoriteScreen(),
+      ),
       ProfileScreen(),
     ];
     return BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(
       builder: (context, state) {
         return Scaffold(
           extendBody: true,
-          body: IndexedStack(index: state.currentNavBarIndex, children: screen),
+          body: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            transitionBuilder: (child, animation) =>
+                FadeTransition(opacity: animation, child: child),
+            child: KeyedSubtree(
+              key: ValueKey(state.currentNavBarIndex),
+              child: screen[state.currentNavBarIndex],
+            ),
+          ),
+          // IndexedStack(index: state.currentNavBarIndex, children: screen),
           bottomNavigationBar: Container(
             margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 16.r),
             decoration: BoxDecoration(
