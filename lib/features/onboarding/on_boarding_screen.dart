@@ -198,7 +198,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 backgroundColor: AppColors.darkYellow,
                               ),
                               onPressed: () =>
-                                  (context).go(AppRouteStrings.homeScreen),
+                                  (context).go(AppRouteStrings.bottomNavBar),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 35.w,

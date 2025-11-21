@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedding_prompt_app/core/constants/app_icons.dart';
 import 'package:wedding_prompt_app/core/constants/app_images.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_event.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_state.dart';
+import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
@@ -30,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final bloc = context.read<HomesBloc>();
 
     // Demo category list
+
     List<Map<String, String>> categories = [
       {"title": AppStrings.preWedding, "image": AppImages.preWedding},
       {"title": AppStrings.engagement, "image": AppImages.engagement},
@@ -41,14 +44,123 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18.w),
-        height: 70.h,
-        decoration: BoxDecoration(
-          color: AppColors.black,
-          borderRadius: BorderRadiusGeometry.all(Radius.circular(16.r)),
-        ),
-      ),
+      // bottomNavigationBar: Expanded(
+      //   child: Container(
+      //     margin: const EdgeInsets.symmetric(horizontal: 18),
+      //     height: 90.h,
+      //     width: double.infinity.w,
+      //     decoration: BoxDecoration(
+      //       color: AppColors.black,
+      //       borderRadius: BorderRadius.circular(16),
+      //     ),
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: [
+      //         // ---------------- HOME ----------------
+      //         GestureDetector(
+      //           onTap: () {
+      //             context.read<HomesBloc>().add(NavBarInex(0));
+      //           },
+      //           child: Column(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               bloc.state.navbarIndex == 0
+      //                   ? Image.asset(
+      //                       AppIcons.navbarHomeFill,
+      //                       height: 50.h,
+      //                       width: 50.w,
+      //                     ) // Selected Icon
+      //                   : Image.asset(
+      //                       AppIcons.navbarHome,
+      //                       height: 26.h,
+      //                       width: 26.w,
+      //                     ), // Unselected Icon
+      //
+      //               const SizedBox(height: 5),
+      //
+      //               Text(
+      //                 AppStrings.navBarhome,
+      //                 style: size14TextStyle(
+      //                   textColor: bloc.state.navbarIndex == 0
+      //                       ? AppColors.white1
+      //                       : AppColors.transparent,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //
+      //         // ---------------- FAVORITE ----------------
+      //         GestureDetector(
+      //           onTap: () {
+      //             context.read<HomesBloc>().add(NavBarInex(1));
+      //           },
+      //           child: Column(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               bloc.state.navbarIndex == 1
+      //                   ? Image.asset(
+      //                       AppIcons.navbarHeartFill,
+      //                       height: 50.h,
+      //                       width: 50.w,
+      //                     ) // Selected
+      //                   : Image.asset(
+      //                       AppIcons.navbarHeart,
+      //                       height: 26.h,
+      //                       width: 26.w,
+      //                     ), // Unselected
+      //
+      //               const SizedBox(height: 5),
+      //
+      //               Text(
+      //                 AppStrings.navBarFavorite,
+      //                 style: size14TextStyle(
+      //                   textColor: bloc.state.navbarIndex == 1
+      //                       ? AppColors.white1
+      //                       : AppColors.transparent,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //
+      //         // ---------------- PROFILE ----------------
+      //         GestureDetector(
+      //           onTap: () {
+      //             context.read<HomesBloc>().add(NavBarInex(2));
+      //           },
+      //           child: Column(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               bloc.state.navbarIndex == 2
+      //                   ? Image.asset(
+      //                       AppIcons.navbarProfileFill,
+      //                       height: 50.h,
+      //                       width: 50.w,
+      //                     ) // Selected
+      //                   : Image.asset(
+      //                       AppIcons.navbarProfile,
+      //                       height: 26.h,
+      //                       width: 26.w,
+      //                     ), // Unselected
+      //
+      //               const SizedBox(height: 5),
+      //
+      //               Text(
+      //                 AppStrings.navBarProfile,
+      //                 style: size14TextStyle(
+      //                   textColor: bloc.state.navbarIndex == 2
+      //                       ? AppColors.white1
+      //                       : AppColors.transparent,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       appBar: AppBar(
         title: Text(
           AppStrings.aiWedMaker,
@@ -61,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(height: 20),
 
-            // -------------------- SLIDER --------------------
+            ////////////     SLIDER
             BlocBuilder<HomesBloc, HomesState>(
               builder: (context, state) {
                 return AnimatedSwitcher(
@@ -89,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Image.asset(AppIcons.heart, fit: BoxFit.cover),
                       ),
 
-                      // Title + Generate Button
+                      // Title and Generate Button
                       Positioned(
                         bottom: 15,
                         right: 0,
@@ -154,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
-            // ---------------- LOVABLE CATEGORIES TITLE ----------------
+            ////////////    LOVABLE CATEGORIES TITLE
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
               child: Align(
@@ -167,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // ---------------- FIRST 2 CATEGORY ITEMS ----------------
+            ///////////     FIRST 2 CATEGORY ITEMS
             _buildCommonGridView(
               itemCount: 2,
               itemBuilder: (context, index) {
@@ -180,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 20.h),
 
-            //  ---------------- FULL WIDTH THIRD ITEM ----------------
+            ///////////    FULL WIDTH THIRD ITEM
             fullWidthCategoryItem(
               image: categories[2]["image"]!,
               title: categories[2]["title"]!,
@@ -199,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20.h),
 
-            // ---------------- REMAINING ITEMS GRID ----------------
+            /////////     REMAINING ITEMS GRID
             _buildCommonGridView(
               itemCount: categories.length - 3,
               itemBuilder: (context, index) {
@@ -216,98 +328,108 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
 
-Widget _buildCommonGridView({
-  required int itemCount,
-  required Widget? Function(BuildContext, int) itemBuilder,
-}) {
-  return GridView.builder(
-    shrinkWrap: true,
-    padding: EdgeInsets.symmetric(horizontal: 16.w),
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: itemCount,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      crossAxisSpacing: 20.w,
-      mainAxisSpacing: 20.h,
-      childAspectRatio: .83,
-    ),
-    itemBuilder: itemBuilder,
-  );
-}
+  Widget _buildCommonGridView({
+    required int itemCount,
+    required Widget? Function(BuildContext, int) itemBuilder,
+  }) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: itemCount,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 20.w,
+        mainAxisSpacing: 20.h,
+        childAspectRatio: .83,
+      ),
+      itemBuilder: itemBuilder,
+    );
+  }
 
-/////////////    CATEGORY ITEM Normal Grid    //////////
-Widget categoryItem({required String image, required String title}) {
-  return Container(
-    padding: EdgeInsets.all(8.r),
-    decoration: BoxDecoration(
-      color: AppColors.white1,
-      borderRadius: BorderRadius.circular(16.r),
-      border: Border.all(color: AppColors.darkYellow, width: 1),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black,
-          blurRadius: 15,
-          spreadRadius: -8,
-          offset: Offset(5, 5),
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
-          child: Image.asset(image, fit: BoxFit.cover),
-        ),
-        Expanded(
-          child: Center(
-            child: Text(
-              title,
-              style: size16TextStyle(fontFamily: AppStrings.playfairDisplay),
+  /////////////    CATEGORY ITEM Normal Grid    //////////
+  Widget categoryItem({required String image, required String title}) {
+    return InkWell(
+      onTap: () => context.push(AppRouteStrings.categories),
+      child: Container(
+        padding: EdgeInsets.all(8.r),
+        decoration: BoxDecoration(
+          color: AppColors.white1,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: AppColors.darkYellow, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black,
+              blurRadius: 15,
+              spreadRadius: -8,
+              offset: Offset(5, 5),
             ),
-          ),
+          ],
         ),
-      ],
-    ),
-  );
-}
-
-// ---------------- FULL WIDTH CATEGORY ITEM ----------------
-Widget fullWidthCategoryItem({required String image, required String title}) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 16.w),
-    padding: EdgeInsets.all(8.w),
-    decoration: BoxDecoration(
-      color: AppColors.white1,
-      borderRadius: BorderRadius.circular(40.r),
-      border: Border.all(color: AppColors.darkYellow, width: 1),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.black,
-          blurRadius: 15,
-          spreadRadius: -8,
-          offset: Offset(5, 5),
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30.r),
-          child: Image.asset(image, fit: BoxFit.fill),
-        ),
-        Padding(
-          padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
-          child: Text(
-            title,
-            style: size16TextStyle(
-              fontFamily: AppStrings.playfairDisplay,
-              fontWeight: FontWeight.w600,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: Image.asset(image, fit: BoxFit.cover),
             ),
-          ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  title,
+                  style: size16TextStyle(
+                    fontFamily: AppStrings.playfairDisplay,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
+
+  //////////      FULL WIDTH CATEGORY ITEM
+  Widget fullWidthCategoryItem({required String image, required String title}) {
+    return InkWell(
+      onTap: () {
+        context.push(AppRouteStrings.categories);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.all(8.w),
+        decoration: BoxDecoration(
+          color: AppColors.white1,
+          borderRadius: BorderRadius.circular(40.r),
+          border: Border.all(color: AppColors.darkYellow, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black,
+              blurRadius: 15,
+              spreadRadius: -8,
+              offset: Offset(5, 5),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30.r),
+              child: Image.asset(image, fit: BoxFit.fill),
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
+              child: Text(
+                title,
+                style: size16TextStyle(
+                  fontFamily: AppStrings.playfairDisplay,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
