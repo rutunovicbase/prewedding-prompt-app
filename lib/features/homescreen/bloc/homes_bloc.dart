@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:wedding_prompt_app/core/constants/app_strings.dart';
+import 'package:wedding_prompt_app/features/homescreen/models/categories_model.dart';
 
 import '../../../core/constants/app_images.dart';
 import 'homes_event.dart';
@@ -14,12 +15,20 @@ class HomesBloc extends Bloc<HomesEvent, HomesState> {
     on<SliderTimer>(_onSliderTimer);
     on<SliderIndex>(_onSliderIndex);
   }
-
-  final List<Map<String, String>> sliderImage = [
-    {"Image": AppImages.slider1, "title": AppStrings.theRoyalPreWedding},
-    {"Image": AppImages.slider2, "title": AppStrings.thePerfectMehndi},
-    {"Image": AppImages.slider3, "title": AppStrings.discoSangeet},
-    {"Image": AppImages.slider4, "title": AppStrings.gardernPreWedding},
+  final List<CategoriesModel> sliderImage = [
+    CategoriesModel(
+      image: AppImages.slider1,
+      title: AppStrings.theRoyalPreWedding,
+    ),
+    CategoriesModel(
+      image: AppImages.slider2,
+      title: AppStrings.thePerfectMehndi,
+    ),
+    CategoriesModel(image: AppImages.slider3, title: AppStrings.discoSangeet),
+    CategoriesModel(
+      image: AppImages.slider4,
+      title: AppStrings.gardernPreWedding,
+    ),
   ];
 
   Future<void> _onSliderTimer(

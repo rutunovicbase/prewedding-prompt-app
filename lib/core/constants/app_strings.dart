@@ -60,4 +60,12 @@ class AppStrings {
   static const String rateUs = "Rate Us";
   static const String shareApp = "Share App";
   static const String privacyPolicy = "Privacy Policy";
+
+  // How to use Screen
+  static const String howToUse = "How to use";
+  static const String generateCopy = "Generate & Copy";
+  static const String openInGemini = "Open in Gemini";
+  static const String useInAITools = "Use in AI Tools";
+  static const String video = "Video";
+  // static const String video = "Video";
 }

@@ -12,6 +12,7 @@ import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/utils/text_styles.dart';
+import 'models/categories_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,134 +34,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Demo category list
 
-    List<Map<String, String>> categories = [
-      {"title": AppStrings.preWedding, "image": AppImages.preWedding},
-      {"title": AppStrings.engagement, "image": AppImages.engagement},
-      {"title": AppStrings.wedding, "image": AppImages.wedding},
-      {"title": AppStrings.sangeet, "image": AppImages.sangeet},
-      {"title": AppStrings.haldi, "image": AppImages.haldi},
-      {"title": AppStrings.mehndi, "image": AppImages.mehndi},
-      {"title": AppStrings.grahpravesh, "image": AppImages.grahpravesh},
+    List<CategoriesModel> lovableCategories = [
+      CategoriesModel(
+        title: AppStrings.preWedding,
+        image: AppImages.preWedding,
+      ),
+      CategoriesModel(
+        title: AppStrings.engagement,
+        image: AppImages.engagement,
+      ),
+      CategoriesModel(title: AppStrings.wedding, image: AppImages.wedding),
+      CategoriesModel(title: AppStrings.sangeet, image: AppImages.sangeet),
+      CategoriesModel(title: AppStrings.haldi, image: AppImages.haldi),
+      CategoriesModel(title: AppStrings.mehndi, image: AppImages.mehndi),
+      CategoriesModel(
+        title: AppStrings.grahpravesh,
+        image: AppImages.grahpravesh,
+      ),
     ];
 
     return Scaffold(
-      // bottomNavigationBar: Expanded(
-      //   child: Container(
-      //     margin: const EdgeInsets.symmetric(horizontal: 18),
-      //     height: 90.h,
-      //     width: double.infinity.w,
-      //     decoration: BoxDecoration(
-      //       color: AppColors.black,
-      //       borderRadius: BorderRadius.circular(16),
-      //     ),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children: [
-      //         // ---------------- HOME ----------------
-      //         GestureDetector(
-      //           onTap: () {
-      //             context.read<HomesBloc>().add(NavBarInex(0));
-      //           },
-      //           child: Column(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               bloc.state.navbarIndex == 0
-      //                   ? Image.asset(
-      //                       AppIcons.navbarHomeFill,
-      //                       height: 50.h,
-      //                       width: 50.w,
-      //                     ) // Selected Icon
-      //                   : Image.asset(
-      //                       AppIcons.navbarHome,
-      //                       height: 26.h,
-      //                       width: 26.w,
-      //                     ), // Unselected Icon
-      //
-      //               const SizedBox(height: 5),
-      //
-      //               Text(
-      //                 AppStrings.navBarhome,
-      //                 style: size14TextStyle(
-      //                   textColor: bloc.state.navbarIndex == 0
-      //                       ? AppColors.white1
-      //                       : AppColors.transparent,
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //
-      //         // ---------------- FAVORITE ----------------
-      //         GestureDetector(
-      //           onTap: () {
-      //             context.read<HomesBloc>().add(NavBarInex(1));
-      //           },
-      //           child: Column(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               bloc.state.navbarIndex == 1
-      //                   ? Image.asset(
-      //                       AppIcons.navbarHeartFill,
-      //                       height: 50.h,
-      //                       width: 50.w,
-      //                     ) // Selected
-      //                   : Image.asset(
-      //                       AppIcons.navbarHeart,
-      //                       height: 26.h,
-      //                       width: 26.w,
-      //                     ), // Unselected
-      //
-      //               const SizedBox(height: 5),
-      //
-      //               Text(
-      //                 AppStrings.navBarFavorite,
-      //                 style: size14TextStyle(
-      //                   textColor: bloc.state.navbarIndex == 1
-      //                       ? AppColors.white1
-      //                       : AppColors.transparent,
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //
-      //         // ---------------- PROFILE ----------------
-      //         GestureDetector(
-      //           onTap: () {
-      //             context.read<HomesBloc>().add(NavBarInex(2));
-      //           },
-      //           child: Column(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               bloc.state.navbarIndex == 2
-      //                   ? Image.asset(
-      //                       AppIcons.navbarProfileFill,
-      //                       height: 50.h,
-      //                       width: 50.w,
-      //                     ) // Selected
-      //                   : Image.asset(
-      //                       AppIcons.navbarProfile,
-      //                       height: 26.h,
-      //                       width: 26.w,
-      //                     ), // Unselected
-      //
-      //               const SizedBox(height: 5),
-      //
-      //               Text(
-      //                 AppStrings.navBarProfile,
-      //                 style: size14TextStyle(
-      //                   textColor: bloc.state.navbarIndex == 2
-      //                       ? AppColors.white1
-      //                       : AppColors.transparent,
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       appBar: AppBar(
         title: Text(
           AppStrings.aiWedMaker,
@@ -189,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 280,
                         child: Image.asset(
-                          bloc.sliderImage[state.currentIndex]["Image"]!,
+                          bloc.sliderImage[state.currentIndex].image,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -210,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              padding: EdgeInsets.symmetric(horizontal: 8.h),
                               height: 25,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -224,8 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: Center(
                                 child: Text(
-                                  bloc.sliderImage[state
-                                      .currentIndex]["title"]!,
+                                  bloc.sliderImage[state.currentIndex].title,
                                   style: size12TextStyle(
                                     fontFamily: AppStrings.playfair,
                                     fontWeight: FontWeight.w300,
@@ -236,18 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 20.h),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.darkYellow,
                                 ),
-                                onPressed: () {},
+                                onPressed: () => context.push(
+                                  AppRouteStrings.promptScreen,
+                                  extra: bloc.sliderImage[state.currentIndex],
+                                ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 3,
-                                  ),
+                                  padding: EdgeInsets.symmetric(vertical: 3.h),
                                   child: Text(
                                     AppStrings.generate,
                                     style: size14TextStyle(
@@ -283,20 +174,14 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildCommonGridView(
               itemCount: 2,
               itemBuilder: (context, index) {
-                return categoryItem(
-                  image: categories[index]["image"]!,
-                  title: categories[index]["title"]!,
-                );
+                return categoryItem(category: lovableCategories[index]);
               },
             ),
 
             SizedBox(height: 20.h),
 
             ///////////    FULL WIDTH THIRD ITEM
-            fullWidthCategoryItem(
-              image: categories[2]["image"]!,
-              title: categories[2]["title"]!,
-            ),
+            fullWidthCategoryItem(category: lovableCategories[2]),
             SizedBox(height: 20.h),
             Container(
               color: AppColors.black,
@@ -313,12 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
             /////////     REMAINING ITEMS GRID
             _buildCommonGridView(
-              itemCount: categories.length - 3,
+              itemCount: lovableCategories.length - 3,
               itemBuilder: (context, index) {
-                return categoryItem(
-                  image: categories[index + 3]["image"]!,
-                  title: categories[index + 3]["title"]!,
-                );
+                return categoryItem(category: lovableCategories[index + 3]);
               },
             ),
 
@@ -349,9 +231,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /////////////    CATEGORY ITEM Normal Grid    //////////
-  Widget categoryItem({required String image, required String title}) {
+  Widget categoryItem({required CategoriesModel category}) {
     return InkWell(
-      onTap: () => context.push(AppRouteStrings.categories),
+      onTap: () =>
+          context.push(AppRouteStrings.categoriesScreen, extra: category),
       child: Container(
         padding: EdgeInsets.all(8.r),
         decoration: BoxDecoration(
@@ -371,12 +254,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.r),
-              child: Image.asset(image, fit: BoxFit.cover),
+              child: Image.asset(category.image, fit: BoxFit.cover),
             ),
             Expanded(
               child: Center(
                 child: Text(
-                  title,
+                  category.title,
                   style: size16TextStyle(
                     fontFamily: AppStrings.playfairDisplay,
                   ),
@@ -390,10 +273,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //////////      FULL WIDTH CATEGORY ITEM
-  Widget fullWidthCategoryItem({required String image, required String title}) {
+  Widget fullWidthCategoryItem({required CategoriesModel category}) {
     return InkWell(
       onTap: () {
-        context.push(AppRouteStrings.categories);
+        context.push(AppRouteStrings.categoriesScreen, extra: category);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -415,12 +298,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(30.r),
-              child: Image.asset(image, fit: BoxFit.fill),
+              child: Image.asset(category.image, fit: BoxFit.fill),
             ),
             Padding(
               padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
               child: Text(
-                title,
+                category.title,
                 style: size16TextStyle(
                   fontFamily: AppStrings.playfairDisplay,
                   fontWeight: FontWeight.w600,
