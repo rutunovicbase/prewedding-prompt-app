@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedding_prompt_app/core/constants/app_colors.dart';
 import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 import 'package:wedding_prompt_app/core/utils/text_styles.dart';
 import 'package:wedding_prompt_app/features/favoritescreen/widget/custom_grid_item.dart';
+import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../../core/constants/app_images.dart';
 import '../homescreen/models/categories_model.dart';
@@ -125,7 +127,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     childAspectRatio: .50,
                   ),
                   itemBuilder: (context, index) {
-                    return CustomGridItem(category: gridViewItems[index]);
+                    return CustomGridItem(
+                      category: gridViewItems[index],
+                      onTap: () => context.push(
+                        AppRouteStrings.promptScreen,
+                        extra: gridViewItems[index],
+                      ),
+                    );
                   },
                 ),
               ],

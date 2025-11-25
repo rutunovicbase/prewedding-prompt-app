@@ -13,8 +13,13 @@ class AppIcons {
   static String rateUs = "assets/icons/rateus.png";
   static String shareApp = "assets/icons/share_app.png";
   // how to use screen
-  static String generateCopy = "assets/icons/generate_copy";
-  static String openInGemini = "assets/icons/open_in_gemini";
-  static String useInAITools = "assets/icons/use_in_ai_tools";
-  static String saveFavorites = "assets/icons/save_favorites";
+  static String generateCopy = "assets/icons/generate_copy.png";
+  static String openInGemini = "assets/icons/open_in_gemini.png";
+  static String useInAITools = "assets/icons/use_in_ai_tools.png";
+  static String saveFavorites = "assets/icons/save_favorites.png";
+
+  // prompt Screen
+  static String gemini = "assets/icons/gemini.png";
+  static String copyP = "assets/icons/copyp.png";
+  static String shareP = "assets/icons/sharep.png";
 }
