@@ -61,7 +61,6 @@ import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/home_screen.dart';
 import 'package:wedding_prompt_app/features/homescreen/models/categories_model.dart';
 import 'package:wedding_prompt_app/features/howtousescreen/how_to_use_screen.dart';
-import 'package:wedding_prompt_app/features/onboarding/on_boarding_screen.dart';
 import 'package:wedding_prompt_app/features/promptscreen/bloc/prompt_bloc.dart';
 import 'package:wedding_prompt_app/features/promptscreen/prompt_screen.dart';
 import 'package:wedding_prompt_app/features/splash/splash_screen.dart';
@@ -69,6 +68,7 @@ import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../features/bottomnavigationbar/bottom_nav_bar.dart';
 import '../features/onboarding/bloc/onboarding_cubit.dart';
+import '../features/onboarding/on_boarding_screen.dart';
 
 final GlobalKey<NavigatorState> navigatoryKey = GlobalKey<NavigatorState>();
 
