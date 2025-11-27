@@ -37,22 +37,20 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
-              child: Container(
-                height: 200.h,
-                width: 343.w,
-                decoration: BoxDecoration(
-                  color: AppColors.cream,
-                  borderRadius: BorderRadius.circular(30.r),
-                ),
-                child: Center(
-                  child: Text(
-                    AppStrings.video,
-                    style: size22TextStyle(
-                      fontFamily: AppStrings.playfairDisplay,
-                      fontWeight: FontWeight.bold,
-                    ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+              height: 200.h,
+              width: 343.w,
+              decoration: BoxDecoration(
+                color: AppColors.cream,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+              child: Center(
+                child: Text(
+                  AppStrings.video,
+                  style: size22TextStyle(
+                    fontFamily: AppStrings.playfairDisplay,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

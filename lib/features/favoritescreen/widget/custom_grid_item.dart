@@ -21,57 +21,53 @@ class CustomGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Stack(
-          children: [
-            InkWell(
-              onTap: onTap,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.white1,
-                  borderRadius: BorderRadius.circular(16.r),
-                  border: Border.all(color: AppColors.darkYellow, width: 1.w),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black,
-                      blurRadius: 15.r,
-                      spreadRadius: -8.r,
-                      offset: const Offset(5, 5),
-                    ),
-                  ],
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.white1,
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: AppColors.darkYellow, width: 1.w),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black,
+                  blurRadius: 15.r,
+                  spreadRadius: -8.r,
+                  offset: const Offset(5, 5),
                 ),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
-                      child: Image.asset(
-                        category.image,
-                        height: 230.h,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(height: 10.h),
-                    Center(
-                      child: Text(
-                        category.title,
-                        style: size16TextStyle(
-                          fontFamily: AppStrings.playfairDisplay,
-                        ),
-                      ),
-                    ),
-                  ],
+              ],
+            ),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.r),
+                  child: Image.asset(
+                    category.image,
+                    height: 230.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
+                SizedBox(height: 10.h),
+                Center(
+                  child: Text(
+                    category.title,
+                    style: size16TextStyle(
+                      fontFamily: AppStrings.playfairDisplay,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Positioned(
-              right: 15,
-              top: 15,
-              child: Image.asset(AppIcons.heart, height: 30.h),
-            ),
-          ],
+          ),
+        ),
+        Positioned(
+          right: 15,
+          top: 15,
+          child: Image.asset(AppIcons.heart, height: 30.h),
         ),
       ],
     );
