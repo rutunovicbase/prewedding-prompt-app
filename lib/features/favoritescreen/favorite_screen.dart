@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedding_prompt_app/core/constants/app_colors.dart';
-import 'package:wedding_prompt_app/core/constants/app_icons.dart';
 import 'package:wedding_prompt_app/core/constants/app_strings.dart';
 import 'package:wedding_prompt_app/core/utils/text_styles.dart';
+import 'package:wedding_prompt_app/features/favoritescreen/widget/custom_grid_item.dart';
+import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../../core/constants/app_images.dart';
+import '../homescreen/models/categories_model.dart';
 import 'bloc/favorite_bloc.dart';
 import 'bloc/favorite_event.dart';
 import 'bloc/favorite_state.dart';
@@ -19,11 +22,20 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  final List<Map<String, String>> gridViewItems = [
-    {"title": AppStrings.thePalaceWedding, "Image": AppImages.onboarding1},
-    {"title": AppStrings.gardenCouple, "Image": AppImages.gardenCouple},
-    {"title": AppStrings.discoSangeet, "Image": AppImages.sangeetDanceF},
-    {"title": AppStrings.haldi, "Image": AppImages.haldiF},
+  final List<CategoriesModel> gridViewItems = [
+    CategoriesModel(
+      title: AppStrings.thePalaceWedding,
+      image: AppImages.onboarding1,
+    ),
+    CategoriesModel(
+      title: AppStrings.gardenCouple,
+      image: AppImages.gardenCouple,
+    ),
+    CategoriesModel(
+      title: AppStrings.discoSangeet,
+      image: AppImages.sangeetDanceF,
+    ),
+    CategoriesModel(title: AppStrings.haldi, image: AppImages.haldiF),
   ];
   List<String> topCategoriesList = [
     AppStrings.all,
@@ -116,8 +128,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                   itemBuilder: (context, index) {
                     return CustomGridItem(
-                      image: gridViewItems[index]["Image"]!,
-                      title: gridViewItems[index]["title"]!,
+                      category: gridViewItems[index],
+                      onTap: () => context.push(
+                        AppRouteStrings.promptScreen,
+                        extra: gridViewItems[index],
+                      ),
                     );
                   },
                 ),
@@ -126,65 +141,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
         );
       },
-    );
-  }
-}
-
-/////////     CustomGridView
-class CustomGridItem extends StatelessWidget {
-  final String image;
-  final String title;
-
-  const CustomGridItem({super.key, required this.image, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: AppColors.white1,
-            borderRadius: BorderRadius.circular(16.r),
-            border: Border.all(color: AppColors.darkYellow, width: 1.w),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.black,
-                blurRadius: 15.r,
-                spreadRadius: -8.r,
-                offset: const Offset(5, 5),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: Image.asset(
-                  image,
-                  height: 230.h,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: Text(
-                  title,
-                  style: size16TextStyle(
-                    fontFamily: AppStrings.playfairDisplay,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          right: 15,
-          top: 15,
-          child: Image.asset(AppIcons.heart, height: 30),
-        ),
-      ],
     );
   }
 }

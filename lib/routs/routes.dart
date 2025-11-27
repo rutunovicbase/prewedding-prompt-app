@@ -59,12 +59,16 @@ import 'package:wedding_prompt_app/features/bottomnavigationbar/bloc/bottom_navi
 import 'package:wedding_prompt_app/features/categories/categories_screen.dart';
 import 'package:wedding_prompt_app/features/homescreen/bloc/homes_bloc.dart';
 import 'package:wedding_prompt_app/features/homescreen/home_screen.dart';
-import 'package:wedding_prompt_app/features/onboarding/on_boarding_screen.dart';
+import 'package:wedding_prompt_app/features/homescreen/models/categories_model.dart';
+import 'package:wedding_prompt_app/features/howtousescreen/how_to_use_screen.dart';
+import 'package:wedding_prompt_app/features/promptscreen/bloc/prompt_bloc.dart';
+import 'package:wedding_prompt_app/features/promptscreen/prompt_screen.dart';
 import 'package:wedding_prompt_app/features/splash/splash_screen.dart';
 import 'package:wedding_prompt_app/routs/app_route_strings.dart';
 
 import '../features/bottomnavigationbar/bottom_nav_bar.dart';
 import '../features/onboarding/bloc/onboarding_cubit.dart';
+import '../features/onboarding/on_boarding_screen.dart';
 
 final GlobalKey<NavigatorState> navigatoryKey = GlobalKey<NavigatorState>();
 
@@ -115,9 +119,31 @@ class Routes {
           ),
         ),
       ),
+      // Categories Screen
       GoRoute(
-        path: AppRouteStrings.categories,
-        builder: (context, state) => CategoriesScreen(),
+        path: AppRouteStrings.categoriesScreen,
+        builder: (context, state) {
+          final data = state.extra as CategoriesModel;
+          return CategoriesScreen(category: data);
+        },
+      ),
+      ////  promptScreen
+      GoRoute(
+        path: AppRouteStrings.promptScreen,
+        builder: (context, state) {
+          final data = state.extra as CategoriesModel;
+          return BlocProvider(
+            create: (context) => PromptBloc(),
+            child: PromptScreen(lovable: data),
+          );
+        },
+      ),
+      ////  How to use screen
+      GoRoute(
+        path: AppRouteStrings.howToUseScreen,
+        builder: (context, state) {
+          return HowToUseScreen();
+        },
       ),
     ],
   );

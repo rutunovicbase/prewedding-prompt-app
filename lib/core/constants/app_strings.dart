@@ -60,4 +60,37 @@ class AppStrings {
   static const String rateUs = "Rate Us";
   static const String shareApp = "Share App";
   static const String privacyPolicy = "Privacy Policy";
+
+  // How to use Screen
+  static const String howToUse = "How to use";
+  static const String generateCopy = "Generate & Copy";
+  static const String openInGemini = "Open in Gemini";
+  static const String useInAITools = "Use in AI Tools";
+  static const String saveFavorites = "Save Favorites ";
+  static const String video = "Video";
+  static const String descriptionHtu1 =
+      'Tap the "Let’s create magic" button to reveal a unique Al prompt. Then, use "Copy" to save it to your clipboard, ready for any Al image generation tool.';
+  static const String descriptionHtu2 =
+      'Tap "Open Gemini" to quickly launch Google\'s Gemini AI with the prompt pre-filled for instant image generation.';
+  static const String descriptionHtu3 = """
+Paste the copied prompt into your favorite AI image generation tool for the best results:
+
+• Gemini AI (recommended)
+• DeepAI
+• Ideogram
+• DALL-
+• Leonardo AI
+• Chat GPT
+
+Our prompts are optimized to deliver stunning images with these platforms.
+""";
+
+  static const String descriptionHtu4 =
+      "Tap the heart icon next to the prompt to save it to your favorites. Easily access your cherished prompts anytime!";
+  // prompt screen
+  static const String relatedPrompts = "Related Prompts";
+  static const String ad = "Ad";
+  static const String openInGeminiAI = "Open in Gemini AI";
+  static const String copyPrompt = "Copy Prompt";
+  static const String sharePrompt = "Share prompt";
 }

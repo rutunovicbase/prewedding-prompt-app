@@ -79,7 +79,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           return Stack(
             children: [
               PageView.builder(
-                scrollDirection: Axis.vertical,
+                // scrollDirection: Axis.vertical,
                 controller: _controller,
                 onPageChanged: (index) {
                   context.read<OnboardingCubit>().currentPage(index);
@@ -148,7 +148,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 30.h),
                     (state.currentIndex != 2)
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
